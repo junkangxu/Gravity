@@ -4,7 +4,10 @@ var ctx = canvas.getContext("2d");
 const ballRadius = 10;
 
 var x = canvas.width / 2;
-var y = canvas.height - 30;
+var y = canvas.height / 2;
+
+const centerX = canvas.width / 2;
+const centerY = canvas.height / 2;
 
 const dx = 5;
 const dy = -5;
@@ -20,6 +23,8 @@ var score = 0;
 var gravityInterval;
 var drawInterval;
 
+var r;
+
 var keyPressed = {
   37: false,
   38: false,
@@ -27,13 +32,16 @@ var keyPressed = {
   40: false
 }
 
-// TODO: Generate gravity
 document.onkeydown = function(e) {
   keyPressed[e.keyCode] = true;
 }
 
 document.onkeyup = function(e) {
   keyPressed[e.keyCode] = false;
+}
+
+var calculateDistance = function() {
+  return Math.round(10000 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
 }
 
 var getRandomArbitrary = function(min, max) {
@@ -62,7 +70,12 @@ var drawBall = function() {
 var stopGame = function() {
   clearInterval(gravityInterval);
   clearInterval(drawInterval);
-  alert("Game Over\n Score: " + score);
+  r = confirm("Game Over\n Score: " + score);
+  if (r == true) {
+    window.location.reload(false);
+  } else {
+    window.location.reload(false);
+  }
 }
 
 var detectionCheck = function() {
@@ -81,7 +94,7 @@ var draw = function() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawScore();
-  score += 1;
+  score += calculateDistance();
   x += gravityX;
   y += gravityY;
   detectionCheck();
