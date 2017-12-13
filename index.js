@@ -1,58 +1,55 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-var ballRadius = 10;
+const ballRadius = 10;
 
 var x = canvas.width / 2;
 var y = canvas.height - 30;
 
-var dx = 2;
-var dy = -2;
+const dx = 5;
+const dy = -5;
 
-var upPressed = false;
-var downPressed = false;
-var leftPressed = false;
-var rightPressed = false;
+const minGravity = -5;
+const maxGravity = 5;
+
+var gravityX = 0;
+var gravityY = 0;
+
+var score = 0;
+
+var gravityInterval;
+var drawInterval;
+
+var keyPressed = {
+  37: false,
+  38: false,
+  39: false,
+  40: false
+}
 
 // TODO: Generate gravity
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-var keyDownHandler = function(e) {
-  switch (e.keyCode) {
-    case 37:
-      console.log('left');
-      break;
-    case 38:
-      console.log('up');
-      break;
-    case 39:
-      console.log('right');
-      break;
-    case 40;
-      console.log('down');
-      break;
-  }
+document.onkeydown = function(e) {
+  keyPressed[e.keyCode] = true;
 }
 
-var keyUpHandler = function(e) {
-  switch (e.keyCode) {
-    case 37:
-      console.log('left');
-      break;
-    case 38:
-      console.log('up');
-      break;
-    case 39:
-      console.log('right');
-      break;
-    case 40;
-      console.log('down');
-      break;
-  }
+document.onkeyup = function(e) {
+  keyPressed[e.keyCode] = false;
 }
 
+var getRandomArbitrary = function(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var generateGravity = function() {
+  gravityX = getRandomArbitrary(minGravity, maxGravity);
+  gravityY = getRandomArbitrary(minGravity, maxGravity);
+}
+
+var drawScore = function() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("Score: " + score, 8, 20);
+}
 
 var drawBall = function() {
   ctx.beginPath();
@@ -62,23 +59,49 @@ var drawBall = function() {
   ctx.closePath();
 }
 
+var stopGame = function() {
+  clearInterval(gravityInterval);
+  clearInterval(drawInterval);
+  alert("Game Over\n Score: " + score);
+}
+
 var detectionCheck = function() {
   if (x + dx > canvas.width - ballRadius) {
-
+    stopGame();
   } else if (x + dx < ballRadius) {
-
+    stopGame();
   } else if (y + dy > canvas.height - ballRadius) {
-
+    stopGame();
   } else if (y + dy < ballRadius) {
-
+    stopGame();
   }
 }
 
 var draw = function() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
-  x += dx;
-  y += dy;
+  drawScore();
+  score += 1;
+  x += gravityX;
+  y += gravityY;
+  detectionCheck();
+  if (keyPressed[37]) {
+    x -= dx;
+  }
+
+  if (keyPressed[38]) {
+    y += dy;
+  }
+
+  if (keyPressed[39]) {
+    x += dx;
+  }
+
+  if (keyPressed[40]) {
+    y -= dy;
+  }
+
 }
 
-setInterval(draw, 10);
+gravityInterval = setInterval(generateGravity, 1000);
+drawInterval = setInterval(draw, 10);
