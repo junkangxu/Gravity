@@ -34,6 +34,20 @@ var keyPressed = {
   40: false
 }
 
+var drawRanking = function() {
+  if (!checkCookie(cname)) {
+    return;
+  }
+  var arr = getCookie(cname);
+  var ranks = JSON.parse(arr);
+  for (var i = 0; i < ranks.length; i++) {
+    var node = document.createElement("LI")
+    var textnode = document.createTextNode(ranks[i]);
+    node.appendChild(textnode);
+    document.getElementById("ranking").appendChild(node);
+  }
+}
+
 document.onkeydown = function(e) {
   keyPressed[e.keyCode] = true;
 }
@@ -70,15 +84,24 @@ var drawBall = function() {
 }
 
 var updateRank = function(arr, item) {
-  arr.sort(numberSort);
-  var smallestVal = arr[0];
-  if (smallestVal >= item) {
+  if (arr.length <= 5) {
+    arr.push(item);
+    arr.sort(numberSort);
     var json_arr = JSON.stringify(arr);
     setCookie(cname, json_arr, 7);
   } else {
-    arr[0] = item;
-    var json_arr = JSON.stringify(arr);
-    setCookie(cname, json_arr, 7);
+    arr.sort(numberSort);
+    var smallestVal = arr[0];
+    if (smallestVal >= item) {
+      arr.sort(numberSort);
+      var json_arr = JSON.stringify(arr);
+      setCookie(cname, json_arr, 7);
+    } else {
+      arr[0] = item;
+      arr.sort(numberSort);
+      var json_arr = JSON.stringify(arr);
+      setCookie(cname, json_arr, 7);
+    }
   }
 }
 
@@ -139,5 +162,6 @@ var draw = function() {
 
 }
 
+drawRanking();
 gravityInterval = setInterval(generateGravity, 1000);
 drawInterval = setInterval(draw, 10);
