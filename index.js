@@ -38,8 +38,10 @@ var drawRanking = function() {
   if (!checkCookie(cname)) {
     return;
   }
+  document.getElementById("rankingTitle").innerText("Highest Scores");
   var arr = getCookie(cname);
   var ranks = JSON.parse(arr);
+  ranks = ranks.reverse();
   for (var i = 0; i < ranks.length; i++) {
     var node = document.createElement("LI")
     var textnode = document.createTextNode(ranks[i]);
