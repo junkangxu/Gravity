@@ -69,6 +69,19 @@ var drawBall = function() {
   ctx.closePath();
 }
 
+var updateRank = function(arr, item) {
+  arr.sort(numberSort);
+  var smallestVal = arr[0];
+  if (smallestVal >= item) {
+    var json_arr = JSON.stringify(arr);
+    setCookie(cname, json_arr, 7);
+  } else {
+    arr[0] = item;
+    var json_arr = JSON.stringify(arr);
+    setCookie(cname, json_arr, 7);
+  }
+}
+
 var stopGame = function() {
   clearInterval(gravityInterval);
   clearInterval(drawInterval);
