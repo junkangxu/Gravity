@@ -12,6 +12,8 @@ const centerY = canvas.height / 2;
 const dx = 5;
 const dy = -5;
 
+const cname = 'rank';
+
 const minGravity = -5;
 const maxGravity = 5;
 
@@ -70,6 +72,14 @@ var drawBall = function() {
 var stopGame = function() {
   clearInterval(gravityInterval);
   clearInterval(drawInterval);
+  var ranks;
+  if (checkCookie(cname)) {
+    ranks = getCookie(cname);
+    ranks = JSON.parse(ranks);
+  } else {
+    ranks = [];
+  }
+  updateRank(ranks, score);
   r = confirm("Game Over\n Score: " + score);
   if (r == true) {
     window.location.reload(false);
