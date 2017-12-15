@@ -1,3 +1,9 @@
+header, footer {
+    padding: 1em;
+    clear: left;
+    text-align: center;
+}
+
 canvas {
   background: #eee;
   display: block;
