@@ -75,6 +75,18 @@ var generateGravity = function() {
   gravityY = getRandomArbitrary(minGravity, maxGravity);
 }
 
+var clearCanvas = function() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+var drawGameover = function() {
+  ctx.font = "32px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.textAlign="center";
+  ctx.fillText("Gameover", centerX, centerY - 100);
+  ctx.fillText("Score: " + score, centerX, centerY);
+}
+
 var drawScore = function() {
   ctx.font = "16px Arial";
   ctx.fillStyle = "#0095DD";
@@ -122,12 +134,14 @@ var stopGame = function() {
     ranks = [];
   }
   updateRank(ranks, score);
-  r = confirm("Game Over\n Score: " + score);
-  if (r == true) {
-    window.location.reload(false);
-  } else {
-
-  }
+  clearCanvas();
+  drawGameover();
+  //r = confirm("Game Over\n Score: " + score);
+  //if (r == true) {
+  //  window.location.reload(false);
+  //} else {
+  //
+  //}
 }
 
 var detectionCheck = function() {
@@ -143,7 +157,7 @@ var detectionCheck = function() {
 }
 
 var draw = function() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  clearCanvas();
   drawBall();
   drawScore();
   score += calculateDistance();
