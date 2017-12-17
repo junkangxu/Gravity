@@ -34,6 +34,10 @@ var keyPressed = {
   40: false
 }
 
+var refreshPage = function() {
+  window.location.reload(false);
+}
+
 var drawRanking = function() {
   if (!checkCookie(cname)) {
     return;
@@ -42,9 +46,10 @@ var drawRanking = function() {
   var arr = getCookie(cname);
   var ranks = JSON.parse(arr);
   ranks = ranks.reverse();
-  for (var i = 0; i < ranks.length; i++) {
+  for (var i = 0; i < ranks.length - 1; i++) {
     var node = document.createElement("LI")
     var textnode = document.createTextNode(ranks[i]);
+    node.className = "list-group-item";
     node.appendChild(textnode);
     document.getElementById("ranking").appendChild(node);
   }
@@ -122,7 +127,7 @@ var stopGame = function() {
   if (r == true) {
     window.location.reload(false);
   } else {
-    window.location.reload(false);
+
   }
 }
 

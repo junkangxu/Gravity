@@ -10,8 +10,14 @@ canvas {
   margin: 0 auto;
 }
 
-ol {
+ul {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#newGameButton {
+  text-align:center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
