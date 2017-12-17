@@ -42,7 +42,6 @@ var drawRanking = function() {
   if (!checkCookie(cname)) {
     return;
   }
-  document.getElementById("rankingTitle").innerText = "Highest Scores";
   var arr = getCookie(cname);
   var ranks = JSON.parse(arr);
   ranks = ranks.reverse();
