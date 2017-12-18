@@ -15,8 +15,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="./index.css">
+
+  <title>Gravity</title>
 </head>
 <body>
   <div class="container">
@@ -24,16 +27,33 @@
       <h1>Gravity</h1>
     </header>
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-lg-3">
         <h3>Highest Points</h3>
         <ul id="ranking" class="list-group"></ul>
       </div>
-      <div class="col-lg-8">
+      <div class="col-lg-6">
         <canvas id="myCanvas" width="480" height="480"></canvas>
+      </div>
+      <div class="col-lg-3">
+        <h3>Instructions</h3>
+        <p>Use
+          <i class="fa fa-arrow-up" aria-hidden="true"></i>,
+          <i class="fa fa-arrow-down" aria-hidden="true"></i>,
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>, and
+          <i class="fa fa-arrow-right" aria-hidden="true"></i> to keep ball not outside the canvas
+        </p>
+        <p>
+          The closer the ball is to the center, the higher point you will get
+        </p>
       </div>
     </div>
 
-    <footer>Copyright &copy; Junkang Xu</footer>
+    <footer>
+      <p>Copyright &copy; Junkang Xu</p>
+      <p>
+        <a href="https://github.com/junkangxu">Go to <i class="fa fa-github" aria-hidden="true"></i></a>
+      </p>
+    </footer>
 
     <script type="text/javascript" src="./index.js"></script>
   </div>
