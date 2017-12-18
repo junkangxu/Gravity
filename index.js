@@ -55,6 +55,9 @@ var drawRanking = function() {
 }
 
 document.onkeydown = function(e) {
+  if (e.keyCode == 13) {
+    refreshPage();
+  }
   keyPressed[e.keyCode] = true;
 }
 
@@ -85,6 +88,8 @@ var drawGameover = function() {
   ctx.textAlign="center";
   ctx.fillText("Gameover", centerX, centerY - 100);
   ctx.fillText("Score: " + score, centerX, centerY);
+  ctx.font = "16px Arial";
+  ctx.fillText("Press Enter For New Game", centerX, centerY + 100);
 }
 
 var drawScore = function() {

@@ -23,21 +23,14 @@
     <header>
       <h1>Gravity</h1>
     </header>
-
-    <div id="newGameButton">
-      <button type="button" class="btn btn-outline-primary" onclick="refreshPage()">New Game</button>
-    </div>
-
-    <canvas id="myCanvas" width="480" height="480"></canvas>
-
-    <div id="newGameButton">
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Show Top Scores
-      </button>
-    </div>
-
-    <div class="collapse" id="collapseExample">
-      <ul id="ranking" class="list-group"></ul>
+    <div class="row">
+      <div class="col-lg-2">
+        <h3>Highest Points</h3>
+        <ul id="ranking" class="list-group"></ul>
+      </div>
+      <div class="col-lg-8">
+        <canvas id="myCanvas" width="480" height="480"></canvas>
+      </div>
     </div>
 
     <footer>Copyright &copy; Junkang Xu</footer>
