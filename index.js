@@ -107,7 +107,7 @@ var drawBall = function() {
 }
 
 var updateRank = function(arr, item) {
-  if (arr.length <= 5) {
+  if (arr.length <= 10) {
     arr.push(item);
     arr.sort(numberSort);
     var json_arr = JSON.stringify(arr);
@@ -141,12 +141,6 @@ var stopGame = function() {
   updateRank(ranks, score);
   clearCanvas();
   drawGameover();
-  //r = confirm("Game Over\n Score: " + score);
-  //if (r == true) {
-  //  window.location.reload(false);
-  //} else {
-  //
-  //}
 }
 
 var detectionCheck = function() {
