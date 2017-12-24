@@ -17,6 +17,8 @@ const cname = 'rank';
 const minGravity = -5;
 const maxGravity = 5;
 
+const largestDistance = Math.sqrt(Math.pow(canvas.width / 2, 2) + Math.pow(canvas.height / 2, 2));
+
 var gravityX = 0;
 var gravityY = 0;
 
@@ -32,10 +34,6 @@ var keyPressed = {
   38: false,
   39: false,
   40: false
-}
-
-var refreshPage = function() {
-  window.location.reload(false);
 }
 
 var drawRanking = function() {
@@ -63,14 +61,6 @@ document.onkeydown = function(e) {
 
 document.onkeyup = function(e) {
   keyPressed[e.keyCode] = false;
-}
-
-var calculateDistance = function() {
-  return Math.round(10000 / Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
-}
-
-var getRandomArbitrary = function(min, max) {
-  return Math.random() * (max - min) + min;
 }
 
 var generateGravity = function() {
@@ -159,7 +149,8 @@ var draw = function() {
   clearCanvas();
   drawBall();
   drawScore();
-  score += calculateDistance();
+
+  score += getScore(x, y, centerX, centerY, largestDistance);
   x += gravityX;
   y += gravityY;
   detectionCheck();
