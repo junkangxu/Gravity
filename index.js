@@ -1,177 +1,169 @@
+// Generate a 2D canvas
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-
-const ballRadius = 10;
-
+/*
+  constants for game
+  dx, dy: horizontal and vertical speed when users press keys
+  cname: cookie name
+*/
+var ballRadius = 10;
+var centerX = canvas.width / 2;
+var centerY = canvas.height / 2;
+var dx = 5;
+var dy = -5;
+var cname = 'rank';
+var minGravity = -5;
+var maxGravity = 5;
+var largestDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+/*
+  variables to maintain the game
+  x, y: keep the position (x,y) for the ball
+  gravityX, gravityY: current gravity force in the field
+*/
 var x = canvas.width / 2;
 var y = canvas.height / 2;
-
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
-
-const dx = 5;
-const dy = -5;
-
-const cname = 'rank';
-
-const minGravity = -5;
-const maxGravity = 5;
-
-const largestDistance = Math.sqrt(Math.pow(canvas.width / 2, 2) + Math.pow(canvas.height / 2, 2));
-
 var gravityX = 0;
 var gravityY = 0;
-
 var score = 0;
-
+/*
+  intervals for functions to begin and terminated
+*/
 var gravityInterval;
 var drawInterval;
-
-var r;
-
+var r; // probably useless
 var keyPressed = {
-  37: false,
-  38: false,
-  39: false,
-  40: false
-}
-
-var drawRanking = function() {
-  if (!checkCookie(cname)) {
-    return;
-  }
-  var arr = getCookie(cname);
-  var ranks = JSON.parse(arr);
-  ranks = ranks.reverse();
-  for (var i = 0; i < ranks.length - 1; i++) {
-    var node = document.createElement("LI")
-    var textnode = document.createTextNode(ranks[i]);
-    node.className = "list-group-item";
-    node.appendChild(textnode);
-    document.getElementById("ranking").appendChild(node);
-  }
-}
-
-document.onkeydown = function(e) {
-  if (e.keyCode == 13) {
-    refreshPage();
-  }
-  keyPressed[e.keyCode] = true;
-}
-
-document.onkeyup = function(e) {
-  keyPressed[e.keyCode] = false;
-}
-
-var generateGravity = function() {
-  gravityX = getRandomArbitrary(minGravity, maxGravity);
-  gravityY = getRandomArbitrary(minGravity, maxGravity);
-}
-
-var clearCanvas = function() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-var drawGameover = function() {
-  ctx.font = "32px Arial";
-  ctx.fillStyle = "#0095DD";
-  ctx.textAlign="center";
-  ctx.fillText("Gameover", centerX, centerY - 100);
-  ctx.fillText("Score: " + score, centerX, centerY);
-  ctx.font = "16px Arial";
-  ctx.fillText("Press Enter For New Game", centerX, centerY + 100);
-}
-
-var drawScore = function() {
-  ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD";
-  ctx.fillText("Score: " + score, 8, 20);
-}
-
-var drawBall = function() {
-  ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = "#0095DD";
-  ctx.fill();
-  ctx.closePath();
-}
-
-var updateRank = function(arr, item) {
-  if (arr.length <= 10) {
-    arr.push(item);
-    arr.sort(numberSort);
-    var json_arr = JSON.stringify(arr);
-    setCookie(cname, json_arr, 7);
-  } else {
-    arr.sort(numberSort);
-    var smallestVal = arr[0];
-    if (smallestVal >= item) {
-      arr.sort(numberSort);
-      var json_arr = JSON.stringify(arr);
-      setCookie(cname, json_arr, 7);
-    } else {
-      arr[0] = item;
-      arr.sort(numberSort);
-      var json_arr = JSON.stringify(arr);
-      setCookie(cname, json_arr, 7);
+    37: false,
+    38: false,
+    39: false,
+    40: false
+};
+document.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        refreshPage();
     }
-  }
+    keyPressed[e.keyCode] = true;
+};
+document.onkeyup = function (e) {
+    keyPressed[e.keyCode] = false;
+};
+// changes to HTML
+function drawRanking() {
+    if (!checkCookie(cname)) {
+        return;
+    }
+    var arr = getCookie(cname);
+    var ranks = JSON.parse(arr);
+    ranks = ranks.reverse();
+    for (var i = 0; i < ranks.length - 1; i++) {
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode(ranks[i]);
+        node.className = "list-group-item";
+        node.appendChild(textnode);
+        document.getElementById("ranking").appendChild(node);
+    }
 }
-
-var stopGame = function() {
-  clearInterval(gravityInterval);
-  clearInterval(drawInterval);
-  var ranks;
-  if (checkCookie(cname)) {
-    ranks = getCookie(cname);
-    ranks = JSON.parse(ranks);
-  } else {
-    ranks = [];
-  }
-  updateRank(ranks, score);
-  clearCanvas();
-  drawGameover();
+function updateRank(arr, item) {
+    if (arr.length <= 10) {
+        arr.push(item);
+        arr.sort(numberSort);
+        var json_arr = JSON.stringify(arr);
+        setCookie(cname, json_arr, 7);
+    }
+    else {
+        arr.sort(numberSort);
+        var smallestVal = arr[0];
+        if (smallestVal >= item) {
+            arr.sort(numberSort);
+            var json_arr = JSON.stringify(arr);
+            setCookie(cname, json_arr, 7);
+        }
+        else {
+            arr[0] = item;
+            arr.sort(numberSort);
+            var json_arr = JSON.stringify(arr);
+            setCookie(cname, json_arr, 7);
+        }
+    }
 }
-
-var detectionCheck = function() {
-  if (x + dx > canvas.width - ballRadius) {
-    stopGame();
-  } else if (x + dx < ballRadius) {
-    stopGame();
-  } else if (y + dy > canvas.height - ballRadius) {
-    stopGame();
-  } else if (y + dy < ballRadius) {
-    stopGame();
-  }
+// canvas changes
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-
-var draw = function() {
-  clearCanvas();
-  drawBall();
-  drawScore();
-
-  score += getScore(x, y, centerX, centerY, largestDistance);
-  x += gravityX;
-  y += gravityY;
-  detectionCheck();
-  if (keyPressed[37]) {
-    x -= dx;
-  }
-
-  if (keyPressed[38]) {
-    y += dy;
-  }
-
-  if (keyPressed[39]) {
-    x += dx;
-  }
-
-  if (keyPressed[40]) {
-    y -= dy;
-  }
-
+function drawGameover() {
+    ctx.font = "32px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.textAlign = "center";
+    ctx.fillText("Gameover", centerX, centerY - 100);
+    ctx.fillText("Score: " + score, centerX, centerY);
+    ctx.font = "16px Arial";
+    ctx.fillText("Press Enter for New Game", centerX, centerY + 100);
 }
-
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: " + score, 8, 20);
+}
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+function draw() {
+    clearCanvas();
+    drawBall();
+    drawScore();
+    score += getScore(x, y, centerX, centerY, largestDistance);
+    x += gravityX;
+    y += gravityY;
+    detectionCheck();
+    if (keyPressed[37]) {
+        x -= dx;
+    }
+    if (keyPressed[38]) {
+        y += dy;
+    }
+    if (keyPressed[39]) {
+        x += dx;
+    }
+    if (keyPressed[40]) {
+        y -= dy;
+    }
+}
+// gameplan changes
+function generateGravity() {
+    gravityX = getRandomArbitrary(minGravity, maxGravity);
+    gravityY = getRandomArbitrary(minGravity, maxGravity);
+}
+function stopGame() {
+    clearInterval(gravityInterval);
+    clearInterval(drawInterval);
+    var ranks;
+    if (checkCookie(cname)) {
+        ranks = JSON.parse(getCookie(cname));
+    }
+    else {
+        ranks = [];
+    }
+    updateRank(ranks, score);
+    clearCanvas();
+    drawGameover();
+}
+function detectionCheck() {
+    if (x + dx > canvas.width - ballRadius / 2) {
+        stopGame();
+    }
+    else if (x + dx < ballRadius / 2) {
+        stopGame();
+    }
+    else if (y + dy > canvas.height - ballRadius / 2) {
+        stopGame();
+    }
+    else if (y + dy < ballRadius / 2) {
+        stopGame();
+    }
+}
 drawRanking();
 gravityInterval = setInterval(generateGravity, 1000);
 drawInterval = setInterval(draw, 10);
