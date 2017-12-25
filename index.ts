@@ -92,7 +92,7 @@ function drawRanking() {
     let node: any = document.createElement("LI");
     let textnode: any = document.createTextNode(ranks[i]);
     if (ranks[i] == score.toString()) {
-      node.className = "list-group-item active";
+      node.className = "list-group-item list-group-item-warning";
     } else {
       node.className = "list-group-item";
     }
