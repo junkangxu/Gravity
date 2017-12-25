@@ -29,7 +29,7 @@ function getCookie(cname: string): string {
 
 // check if cookie with cname as name exist
 function checkCookie(cname: string): boolean {
-  var user: string = getCookie(cname);
+  let user: string = getCookie(cname);
   if (user != "") {
     return true;
   } else {

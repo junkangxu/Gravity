@@ -10,6 +10,12 @@ declare function getCookie(cname: string): string;
 declare function checkCookie(cname: string): boolean;
 declare function deleteCookie(cname: string);
 
+// import from localstorage.ts
+declare function setLocalStorage(cname: string, cvalue: string);
+declare function getLocalStorage(cname: string): string;
+declare function checkLocalStorage(cname: string): boolean;
+declare function removeLocalStorage(cname: string);
+
 // Generate a 2D canvas
 let canvas = <HTMLCanvasElement> document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
@@ -68,10 +74,10 @@ document.onkeyup = function(e: any) {
 
 // changes to HTML
 function drawRanking() {
-  if (!checkCookie(cname)) {
+  if (!checkLocalStorage(cname)) {
     return;
   }
-  let arr: string = getCookie(cname);
+  let arr: string = getLocalStorage(cname);
   let ranks: string[] = JSON.parse(arr);
   ranks = ranks.reverse();
   for (let i = 0; i < ranks.length - 1; i++) {
@@ -88,19 +94,19 @@ function updateRank(arr: number[], item: number) {
     arr.push(item);
     arr.sort(numberSort);
     let json_arr: string = JSON.stringify(arr);
-    setCookie(cname, json_arr, 7);
+    setLocalStorage(cname, json_arr);
   } else {
     arr.sort(numberSort);
     let smallestVal: number = arr[0];
     if (smallestVal >= item) {
       arr.sort(numberSort);
       let json_arr: string = JSON.stringify(arr);
-      setCookie(cname, json_arr, 7);
+      setLocalStorage(cname, json_arr);
     } else {
       arr[0] = item;
       arr.sort(numberSort);
       let json_arr: string = JSON.stringify(arr);
-      setCookie(cname, json_arr, 7);
+      setLocalStorage(cname, json_arr);
     }
   }
 }
@@ -173,8 +179,8 @@ function stopGame() {
   clearInterval(gravityInterval);
   clearInterval(drawInterval);
   let ranks: number[];
-  if (checkCookie(cname)) {
-    ranks = JSON.parse(getCookie(cname));
+  if (checkLocalStorage(cname)) {
+    ranks = JSON.parse(getLocalStorage(cname));
   } else {
     ranks = [];
   }
