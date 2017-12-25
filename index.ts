@@ -73,7 +73,15 @@ document.onkeyup = function(e: any) {
 }
 
 // changes to HTML
+function clearRanking() {
+  let node: any = document.getElementById("ranking");
+  while (node.hasChildNodes()) {
+    node.removeChild(node.lastChild);
+  }
+}
+
 function drawRanking() {
+  clearRanking();
   if (!checkLocalStorage(cname)) {
     return;
   }

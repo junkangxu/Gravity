@@ -47,7 +47,14 @@ document.onkeyup = function (e) {
     keyPressed[e.keyCode] = false;
 };
 // changes to HTML
+function clearRanking() {
+    var node = document.getElementById("ranking");
+    while (node.hasChildNodes()) {
+        node.removeChild(node.lastChild);
+    }
+}
 function drawRanking() {
+    clearRanking();
     if (!checkLocalStorage(cname)) {
         return;
     }
