@@ -83,7 +83,11 @@ function drawRanking() {
   for (let i = 0; i < ranks.length - 1; i++) {
     let node: any = document.createElement("LI");
     let textnode: any = document.createTextNode(ranks[i]);
-    node.className = "list-group-item";
+    if (ranks[i] == score.toString()) {
+      node.className = "list-group-item active";
+    } else {
+      node.className = "list-group-item";
+    }
     node.appendChild(textnode);
     document.getElementById("ranking").appendChild(node);
   }
@@ -187,6 +191,7 @@ function stopGame() {
   updateRank(ranks, score);
   clearCanvas();
   drawGameover();
+  drawRanking();
 }
 
 function detectionCheck() {
