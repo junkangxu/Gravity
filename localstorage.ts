@@ -8,7 +8,7 @@ function getLocalStorage(cname: string): string {
 
 function checkLocalStorage(cname: string): boolean {
   let cvalue: string = getLocalStorage(cname);
-  if (cvalue != "") {
+  if (cvalue !== null) {
     return true;
   } else {
     return false;

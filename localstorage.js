@@ -6,7 +6,7 @@ function getLocalStorage(cname) {
 }
 function checkLocalStorage(cname) {
     var cvalue = getLocalStorage(cname);
-    if (cvalue != "") {
+    if (cvalue !== null) {
         return true;
     }
     else {
