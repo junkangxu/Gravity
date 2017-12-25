@@ -48,10 +48,10 @@ document.onkeyup = function (e) {
 };
 // changes to HTML
 function drawRanking() {
-    if (!checkCookie(cname)) {
+    if (!checkLocalStorage(cname)) {
         return;
     }
-    var arr = getCookie(cname);
+    var arr = getLocalStorage(cname);
     var ranks = JSON.parse(arr);
     ranks = ranks.reverse();
     for (var i = 0; i < ranks.length - 1; i++) {
@@ -67,7 +67,7 @@ function updateRank(arr, item) {
         arr.push(item);
         arr.sort(numberSort);
         var json_arr = JSON.stringify(arr);
-        setCookie(cname, json_arr, 7);
+        setLocalStorage(cname, json_arr);
     }
     else {
         arr.sort(numberSort);
@@ -75,13 +75,13 @@ function updateRank(arr, item) {
         if (smallestVal >= item) {
             arr.sort(numberSort);
             var json_arr = JSON.stringify(arr);
-            setCookie(cname, json_arr, 7);
+            setLocalStorage(cname, json_arr);
         }
         else {
             arr[0] = item;
             arr.sort(numberSort);
             var json_arr = JSON.stringify(arr);
-            setCookie(cname, json_arr, 7);
+            setLocalStorage(cname, json_arr);
         }
     }
 }
@@ -140,8 +140,8 @@ function stopGame() {
     clearInterval(gravityInterval);
     clearInterval(drawInterval);
     var ranks;
-    if (checkCookie(cname)) {
-        ranks = JSON.parse(getCookie(cname));
+    if (checkLocalStorage(cname)) {
+        ranks = JSON.parse(getLocalStorage(cname));
     }
     else {
         ranks = [];
