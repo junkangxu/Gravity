@@ -2,7 +2,7 @@
 declare function refreshPage();
 declare function numberSort(a: number, b: number): number;
 declare function getRandomArbitrary(min: number, max: number): number;
-declare function getScore(x: number, y: number, centerX: number, centerY: number, largestDistance: number): number;
+declare function getScore(x: number, y: number, centerX: number, centerY: number): number;
 
 // import from cookie.ts
 declare function setCookie(cname: string, cvalue: string, exdays: number);
@@ -33,7 +33,6 @@ const dy: number = -5;
 const cname: string = 'rank';
 const minGravity: number = -5;
 const maxGravity: number = 5;
-const largestDistance: number = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
 
 /*
   variables to maintain the game
@@ -85,8 +84,7 @@ function drawRanking() {
   if (!checkLocalStorage(cname)) {
     return;
   }
-  let arr: string = getLocalStorage(cname);
-  let ranks: string[] = JSON.parse(arr);
+  let ranks: string[] = JSON.parse(getLocalStorage(cname));
   ranks = ranks.reverse();
   for (let i = 0; i < ranks.length - 1; i++) {
     let node: any = document.createElement("LI");
@@ -105,20 +103,16 @@ function updateRank(arr: number[], item: number) {
   if (arr.length <= 10) {
     arr.push(item);
     arr.sort(numberSort);
-    let json_arr: string = JSON.stringify(arr);
-    setLocalStorage(cname, json_arr);
+    setLocalStorage(cname, JSON.stringify(arr));
   } else {
     arr.sort(numberSort);
-    let smallestVal: number = arr[0];
-    if (smallestVal >= item) {
+    if (arr[0] >= item) {
       arr.sort(numberSort);
-      let json_arr: string = JSON.stringify(arr);
-      setLocalStorage(cname, json_arr);
+      setLocalStorage(cname, JSON.stringify(arr));
     } else {
       arr[0] = item;
       arr.sort(numberSort);
-      let json_arr: string = JSON.stringify(arr);
-      setLocalStorage(cname, json_arr);
+      setLocalStorage(cname, JSON.stringify(arr));
     }
   }
 }
@@ -157,7 +151,7 @@ function draw() {
   drawBall();
   drawScore();
 
-  score += getScore(x, y, centerX, centerY, largestDistance);
+  score += getScore(x, y, centerX, centerY);
 
   x += gravityX;
   y += gravityY;

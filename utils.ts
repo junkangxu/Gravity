@@ -21,7 +21,8 @@ function getRandomArbitrary(min: number, max: number): number {
   3. we make a negative relation between the score and the distance with slope 1
   4. such that the closer the higher score
 */
-function getScore(x: number, y: number, centerX: number, centerY: number, largestDistance: number): number {
+function getScore(x: number, y: number, centerX: number, centerY: number): number {
+  const largestDistance: number = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
   var distanceToCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2))
   return Math.round(largestDistance - distanceToCenter);
 }

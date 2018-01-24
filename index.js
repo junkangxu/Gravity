@@ -14,7 +14,6 @@ var dy = -5;
 var cname = 'rank';
 var minGravity = -5;
 var maxGravity = 5;
-var largestDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
 /*
   variables to maintain the game
   x, y: keep the position (x,y) for the ball
@@ -58,8 +57,7 @@ function drawRanking() {
     if (!checkLocalStorage(cname)) {
         return;
     }
-    var arr = getLocalStorage(cname);
-    var ranks = JSON.parse(arr);
+    var ranks = JSON.parse(getLocalStorage(cname));
     ranks = ranks.reverse();
     for (var i = 0; i < ranks.length - 1; i++) {
         var node = document.createElement("LI");
@@ -78,22 +76,18 @@ function updateRank(arr, item) {
     if (arr.length <= 10) {
         arr.push(item);
         arr.sort(numberSort);
-        var json_arr = JSON.stringify(arr);
-        setLocalStorage(cname, json_arr);
+        setLocalStorage(cname, JSON.stringify(arr));
     }
     else {
         arr.sort(numberSort);
-        var smallestVal = arr[0];
-        if (smallestVal >= item) {
+        if (arr[0] >= item) {
             arr.sort(numberSort);
-            var json_arr = JSON.stringify(arr);
-            setLocalStorage(cname, json_arr);
+            setLocalStorage(cname, JSON.stringify(arr));
         }
         else {
             arr[0] = item;
             arr.sort(numberSort);
-            var json_arr = JSON.stringify(arr);
-            setLocalStorage(cname, json_arr);
+            setLocalStorage(cname, JSON.stringify(arr));
         }
     }
 }
@@ -126,7 +120,7 @@ function draw() {
     clearCanvas();
     drawBall();
     drawScore();
-    score += getScore(x, y, centerX, centerY, largestDistance);
+    score += getScore(x, y, centerX, centerY);
     x += gravityX;
     y += gravityY;
     detectionCheck();
