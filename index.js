@@ -60,15 +60,11 @@ function drawRanking() {
     var ranks = JSON.parse(getLocalStorage(cname));
     ranks = ranks.reverse();
     for (var i = 0; i < ranks.length - 1; i++) {
-        var node = document.createElement("LI");
-        var textnode = document.createTextNode(ranks[i]);
-        if (ranks[i] == score.toString()) {
-            node.className = "list-group-item list-group-item-warning";
-        }
-        else {
-            node.className = "list-group-item";
-        }
-        node.appendChild(textnode);
+        var node = document.createElement("tr");
+        var cell = document.createElement("td");
+        var cellText = document.createTextNode(ranks[i]);
+        cell.appendChild(cellText);
+        node.appendChild(cell);
         document.getElementById("ranking").appendChild(node);
     }
 }

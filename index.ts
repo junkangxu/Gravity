@@ -87,14 +87,11 @@ function drawRanking() {
   let ranks: string[] = JSON.parse(getLocalStorage(cname));
   ranks = ranks.reverse();
   for (let i = 0; i < ranks.length - 1; i++) {
-    let node: any = document.createElement("LI");
-    let textnode: any = document.createTextNode(ranks[i]);
-    if (ranks[i] == score.toString()) {
-      node.className = "list-group-item list-group-item-warning";
-    } else {
-      node.className = "list-group-item";
-    }
-    node.appendChild(textnode);
+    let node: any = document.createElement("tr");
+    let cell: any = document.createElement("td");
+    let cellText: any = document.createTextNode(ranks[i]);
+    cell.appendChild(cellText);
+    node.appendChild(cell);
     document.getElementById("ranking").appendChild(node);
   }
 }

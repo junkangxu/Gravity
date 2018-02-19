@@ -28,26 +28,44 @@
     <header>
       <h1>Gravity</h1>
     </header>
-    <div class="row">
-      <div class="col-lg-3">
-        <h3>Highest Points</h3>
-        <ul id="ranking" class="list-group"></ul>
-      </div>
-      <div class="col-lg-6">
-        <canvas id="myCanvas" width="480" height="480"></canvas>
-      </div>
-      <div class="col-lg-3">
-        <h3>Instructions</h3>
-        <p>Use
+
+    <div class="row instruction">
+      <h3>Instructions</h3>
+      <ul>
+        <li>
+          Use
           <i class="fa fa-arrow-up" aria-hidden="true"></i>,
           <i class="fa fa-arrow-down" aria-hidden="true"></i>,
           <i class="fa fa-arrow-left" aria-hidden="true"></i>, and
           <i class="fa fa-arrow-right" aria-hidden="true"></i> to keep ball not outside the canvas
-        </p>
-        <p>
+        </li>
+        <li>
           The closer the ball is to the center, the higher point you will get
-        </p>
-      </div>
+        </li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <canvas id="myCanvas" width="480" height="480"></canvas>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <h3>Highest Points</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Score</th>
+              <th scope="col">Player</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody id="ranking">
+          </tdoby>
+        </table>
     </div>
 
     <footer>
