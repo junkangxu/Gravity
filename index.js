@@ -37,12 +37,14 @@ var keyPressed = {
     40: false
 };
 document.onkeydown = function (e) {
+    e.preventDefault();
     if (e.keyCode == 13) {
         refreshPage();
     }
     keyPressed[e.keyCode] = true;
 };
 document.onkeyup = function (e) {
+    e.preventDefault();
     keyPressed[e.keyCode] = false;
 };
 // changes to HTML

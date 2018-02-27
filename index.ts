@@ -61,6 +61,7 @@ let keyPressed: {[key: number]: boolean; } = {
 };
 
 document.onkeydown = function(e: any) {
+  e.preventDefault()
   if (e.keyCode == 13) {
     refreshPage();
   }
@@ -68,6 +69,7 @@ document.onkeydown = function(e: any) {
 }
 
 document.onkeyup = function(e: any) {
+  e.preventDefault()
   keyPressed[e.keyCode] = false;
 }
 

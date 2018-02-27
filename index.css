@@ -1,6 +1,10 @@
-body {
+container {
   margin: auto;
   width: 600px;
+}
+
+a {
+  color: white;
 }
 
 .instruction {
