@@ -3,8 +3,8 @@ export class Ball {
   static radius = 10;
   x: number;
   y: number;
-  
-  constructor(x, y) {
+
+  constructor(x: number, y: number) {
     this.radius = 10;
     this.x = x;
     this.y = y;

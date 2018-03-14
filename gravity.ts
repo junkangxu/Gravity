@@ -5,12 +5,13 @@ export class Gravity {
   static minGravity = -5;
   static maxGravity = 5;
 
-  gravityX: number;
-  gravityY: number;
+  x: number;
+  y: number;
   gravityInterval: any;
+
   constructor() {
-    this.gravityX = 0;
-    this.gravityY = 0;
+    this.x = 0;
+    this.y = 0;
     this.gravityInterval = null;
   }
 
@@ -23,8 +24,8 @@ export class Gravity {
   }
 
   generateNewGravity(): void {
-    this.gravityX = getRandomArbitrary(Gravity.minGravity, Gravity.maxGravity);
-    this.gravityY = getRandomArbitrary(Gravity.minGravity, Gravity.maxGravity);
+    this.x = getRandomArbitrary(Gravity.minGravity, Gravity.maxGravity);
+    this.y = getRandomArbitrary(Gravity.minGravity, Gravity.maxGravity);
   }
 
 }
