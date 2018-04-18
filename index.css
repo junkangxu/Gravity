@@ -11,10 +11,16 @@ a {
   text-align: center;
 }
 
-header, footer {
+header {
     padding: 1em;
     clear: left;
     text-align: center;
+}
+
+footer {
+   padding: 1em;
+   clear: left;
+   text-align: center;
 }
 
 canvas {
