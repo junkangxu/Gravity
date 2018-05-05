@@ -1,81 +1,47 @@
 <html>
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111252904-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <head>
 
-    gtag('config', 'UA-111252904-1');
-  </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-  <script type="text/javascript" src="./cookie.js"></script>
-  <script type="text/javascript" src="./localstorage.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./game.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>Gravity - Game</title>
+  </head>
 
-  <title>Gravity</title>
-</head>
-<body>
-
-  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <span class="navbar-brand mb-0 h1">
-      <a href="./index.html" style="color: #000">
+  <body>
+    <nav class="nav">
+      <a class="nav-link" href="./index.html">
         Gravity
       </a>
-    </span>
-    <span class="navbar-text">
-      <a href="./game.html">
-        Game
+      <a class="nav-link" href="./game.html">
+        <strong>Game</strong>
       </a>
-    </span>
-    <span class="navbar-text">
-      <a href="./leaderboard.html">
-        Leaderboard
-      </a>
-    </span>
-  </nav>
+      <a class="nav-link" href="./leaderboard.html">Leaderboard</a>
+    </nav>
 
-  <div class="container" style="margin-top: 30px">
-    <header>
-      <h3>Game</h3>
-    </header>
-
-    <div class="row">
-        <canvas id="myCanvas" width="480" height="480"></canvas>
+    <div class="container" style="margin-top: 30px">
+      <div class="row">
+        <canvas id="myCanvas" width="360" height="480"></canvas>
+      </div>
     </div>
 
-    <hr/>
+    <script type="text/javascript" src="./js/localStorage.js"></script>
+    <script type="text/javascript" src="./js/score.js"></script>
+    <script type="text/javascript" src="./js/listener.js"></script>
+    <script type="text/javascript" src="./js/gravity.js"></script>
+    <script type="text/javascript" src="./js/util.js"></script>
+    <script type="text/javascript" src="./js/canvas.js"></script>
+    <script type="text/javascript" src="./js/game.js"></script>
 
-    <div class="row">
-        <h3>Highest Points</h3>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Score</th>
-            </tr>
-          </thead>
-          <tbody id="ranking">
-          </tdoby>
-        </table>
-    </div>
+    <script>
+      drawGameStart();
+    </script>
 
-    <footer>
-      <p>Copyright &copy; Junkang Xu</p>
-      <p>
-        <a href="https://github.com/junkangxu">Go to <i class="fa fa-github" aria-hidden="true"></i></a>
-      </p>
-    </footer>
+  </body>
 
-    <script type="text/javascript" src="./utils.js"></script>
-    <script type="text/javascript" src="./index.js"></script>
-  </div>
-</body>
 </html>

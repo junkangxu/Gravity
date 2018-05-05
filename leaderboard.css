@@ -1,0 +1,14 @@
+.nav {
+  background: #eee;
+}
+
+.container {
+  padding-top: 30px;
+  width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+#HighScoreTime {
+  color: #adbcce;
+}
