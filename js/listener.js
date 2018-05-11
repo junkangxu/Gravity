@@ -16,6 +16,7 @@ document.onkeydown = function(e) {
   }
   if (e.keyCode == 32) {
     gravityInterval = setInterval(generateGravity, 1000);
+    counterInterval = setInterval(setTime, 1000);
     drawInterval = setInterval(beginGame, 10);
   }
   keyPressed[e.keyCode] = true;

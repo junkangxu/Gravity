@@ -2,6 +2,7 @@ canvas {
   background: #eee;
   display: block;
   margin: 0 auto;
+  border: 3px solid #0095DD;
 }
 
 .nav {
