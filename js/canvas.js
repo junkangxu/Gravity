@@ -33,6 +33,18 @@ function drawBall() {
   ctx.closePath();
 }
 
+function drawBackground() {
+  let radius = 50;
+  while(radius < canvas.width || radius < canvas.height) {
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = "#0095DD";
+    ctx.stroke();
+    ctx.closePath();
+    radius += 50;
+  }
+}
+
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

@@ -25,6 +25,7 @@ let drawInterval;
 function beginGame() {
   clearCanvas();
   drawBall();
+  drawBackground();
   drawScore();
   updateScore();
   applyGravity();
