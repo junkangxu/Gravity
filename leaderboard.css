@@ -9,10 +9,25 @@
   margin: 0 auto;
 }
 
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: background: #eee;
+    color: #0095DD;
+    text-align: center;
+    padding-top: 10px;
+}
+
 #HighScoreTime {
   color: #adbcce;
 }
 
 #LongDurationTime {
   color: #adbcce;
+}
+
+#githubIcon {
+  padding-left: 10px;
 }
