@@ -1,10 +1,10 @@
 function drawGameover() {
-  ctx.font = "32px Arial";
+  ctx.font = "32px Chalkduster, fantasy";
   ctx.fillStyle = "#0095DD";
   ctx.textAlign = "center";
   ctx.fillText("Gameover", centerX, centerY - 100);
   ctx.fillText("Score: " + score, centerX, centerY);
-  ctx.font = "16px Arial";
+  ctx.font = "16px Chalkduster, fantasy";
   ctx.fillText("press ENTER for new game", centerX, centerY + 100);
   setLocalScore(score);
   setLocalDuration(totalSeconds);
@@ -13,23 +13,23 @@ function drawGameover() {
 function drawGameStart() {
   drawScore();
   drawCounter();
-  ctx.font = "32px Arial";
+  ctx.font = "32px Chalkduster, fantasy";
   ctx.fillStyle = "#0095DD";
   ctx.textAlign = "center";
   ctx.fillText("Welcome", centerX, centerY - 20);
-  ctx.font = "16px Arial";
+  ctx.font = "16px Chalkduster, fantasy";
   ctx.fillText("press SPACE to start game", centerX, centerY + 20);
 }
 
 function drawScore() {
-  metadataCtx.font = "16px Arial";
+  metadataCtx.font = "16px Chalkduster, fantasy";
   metadataCtx.fillStyle = "#0095DD";
   metadataCtx.textAlign = "start";
   metadataCtx.fillText("Score: " + score, 8, 20);
 }
 
 function drawCounter() {
-  metadataCtx.font = "16px Arial";
+  metadataCtx.font = "16px Chalkduster, fantasy";
   metadataCtx.fillStyle = "#0095DD";
   metadataCtx.textAlign = "start";
   metadataCtx.fillText(minutesLabel + ":" + secondsLabel, 312, 20);
@@ -56,7 +56,7 @@ function drawBackground() {
 }
 
 function drawScoreLabel() {
-  ctx.font = "16px Arial";
+  ctx.font = "16px Chalkduster, fantasy";
   ctx.fillStyle = "#0095DD";
   ctx.textAlign = "center";
   ctx.setLineDash([5, 15]);
