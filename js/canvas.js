@@ -1,10 +1,18 @@
+const largeText = "32px Chalkduster, fantasy";
+const regularText = "16px Chalkduster, fantasy";
+const textColor = "#0095DD";
+
+function setCtxStyle(c, font, align) {
+  c.font = font;
+  c.fillStyle = textColor;
+  c.textAlign = align;
+}
+
 function drawGameover() {
-  ctx.font = "32px Chalkduster, fantasy";
-  ctx.fillStyle = "#0095DD";
-  ctx.textAlign = "center";
+  setCtxStyle(ctx, largeText, "center");
   ctx.fillText("Gameover", centerX, centerY - 100);
   ctx.fillText("Score: " + score, centerX, centerY);
-  ctx.font = "16px Chalkduster, fantasy";
+  ctx.font = regularText;
   ctx.fillText("press ENTER for new game", centerX, centerY + 100);
   setLocalScore(score);
   setLocalDuration(totalSeconds);
@@ -13,32 +21,26 @@ function drawGameover() {
 function drawGameStart() {
   drawScore();
   drawCounter();
-  ctx.font = "32px Chalkduster, fantasy";
-  ctx.fillStyle = "#0095DD";
-  ctx.textAlign = "center";
+  setCtxStyle(ctx, largeText, "center");
   ctx.fillText("Welcome", centerX, centerY - 20);
-  ctx.font = "16px Chalkduster, fantasy";
+  ctx.font = regularText;
   ctx.fillText("press SPACE to start game", centerX, centerY + 20);
 }
 
 function drawScore() {
-  metadataCtx.font = "16px Chalkduster, fantasy";
-  metadataCtx.fillStyle = "#0095DD";
-  metadataCtx.textAlign = "start";
+  setCtxStyle(metadataCtx, regularText, "start");
   metadataCtx.fillText("Score: " + score, 8, 20);
 }
 
 function drawCounter() {
-  metadataCtx.font = "16px Chalkduster, fantasy";
-  metadataCtx.fillStyle = "#0095DD";
-  metadataCtx.textAlign = "start";
-  metadataCtx.fillText(minutesLabel + ":" + secondsLabel, 312, 20);
+  setCtxStyle(metadataCtx, regularText, "start");
+  metadataCtx.fillText(minutesLabel + ":" + secondsLabel, 308, 20);
 }
 
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = "#0095DD";
+  ctx.fillStyle = textColor;
   ctx.fill();
   ctx.closePath();
 }
@@ -48,7 +50,7 @@ function drawBackground() {
   while(radius < canvas.width || radius < canvas.height) {
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = "#0095DD";
+    ctx.strokeStyle = textColor;
     ctx.stroke();
     ctx.closePath();
     radius += 50;
@@ -56,9 +58,7 @@ function drawBackground() {
 }
 
 function drawScoreLabel() {
-  ctx.font = "16px Chalkduster, fantasy";
-  ctx.fillStyle = "#0095DD";
-  ctx.textAlign = "center";
+  setCtxStyle(regularText, "center");
   ctx.setLineDash([5, 15]);
   // labels with 10 sccore
   ctx.fillText("10", centerX, centerY + 5);

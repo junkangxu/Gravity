@@ -15,9 +15,9 @@ function getScore() {
     } else if (distanceToCenter < 200) {
     	return 4;
     } else if (distanceToCenter < 250) {
-    	return 0;
+    	return 2;
     } else {
-    	return 0;
+    	return 1;
     }
 }
 
